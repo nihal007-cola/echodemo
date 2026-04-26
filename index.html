@@ -6,8 +6,6 @@
 <title>EASE - Login</title>
 
 <style>
-
-/* ===== GLOBAL ===== */
 * { box-sizing: border-box; }
 
 body {
@@ -17,13 +15,8 @@ body {
   color: #e2e8f0;
 }
 
-/* ===== LAYOUT ===== */
-.container {
-  display: flex;
-  min-height: 100vh;
-}
+.container { display: flex; min-height: 100vh; }
 
-/* LEFT */
 .left {
   width: 50%;
   display: flex;
@@ -34,10 +27,7 @@ body {
 
 .brand { text-align: center; }
 
-.logo {
-  width: 110px;
-  margin-bottom: 10px;
-}
+.logo { width: 110px; margin-bottom: 10px; }
 
 .ease {
   font-size: 36px;
@@ -47,20 +37,9 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.subtitle {
-  font-size: 15px;
-  color: #22c55e;
-  margin-top: 6px;
-}
+.subtitle { font-size: 15px; color: #22c55e; margin-top: 6px; }
+.tagline { font-size: 13px; color: #94a3b8; margin-top: 5px; }
 
-.tagline {
-  font-size: 13px;
-  color: #94a3b8;
-  margin-top: 5px;
-  white-space: nowrap;
-}
-
-/* RIGHT */
 .right {
   width: 50%;
   display: flex;
@@ -68,7 +47,6 @@ body {
   align-items: center;
 }
 
-/* CARD */
 .card {
   width: 100%;
   max-width: 360px;
@@ -76,15 +54,10 @@ body {
   background: rgba(15, 23, 42, 0.6);
   border: 1px solid #1e293b;
   border-radius: 12px;
-  backdrop-filter: blur(10px);
 }
 
-.card h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
+.card h2 { text-align: center; margin-bottom: 20px; }
 
-/* INPUT */
 .input-group { margin-bottom: 15px; }
 
 input {
@@ -96,7 +69,6 @@ input {
   color: #e2e8f0;
 }
 
-/* BUTTON */
 button {
   width: 100%;
   padding: 12px;
@@ -110,7 +82,6 @@ button {
 
 button:hover { opacity: 0.9; }
 
-/* SWITCH */
 .switch {
   text-align: center;
   margin-top: 12px;
@@ -119,7 +90,6 @@ button:hover { opacity: 0.9; }
   cursor: pointer;
 }
 
-/* PERMISSION */
 .permission-box {
   font-size: 13px;
   color: #94a3b8;
@@ -127,31 +97,16 @@ button:hover { opacity: 0.9; }
   line-height: 1.5;
 }
 
-.permission-box strong { color: #e2e8f0; }
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .container {
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .left {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  .right {
-    width: 100%;
-  }
-
-  .logo { width: 90px; }
-  .ease { font-size: 28px; }
-
+.oauth-btn {
+  margin-bottom: 10px;
+  background: #111827;
+  border: 1px solid #1e293b;
 }
 
+@media (max-width: 768px) {
+  .container { flex-direction: column; }
+  .left, .right { width: 100%; }
+}
 </style>
 </head>
 
@@ -159,105 +114,133 @@ button:hover { opacity: 0.9; }
 
 <div class="container">
 
-  <!-- LEFT -->
-  <div class="left">
-    <div class="brand">
-      <img src="assets/logo.png" class="logo">
-      <div class="ease">EASE</div>
-      <div class="subtitle">Email Automation System Engine</div>
-      <div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
-    </div>
+<div class="left">
+  <div class="brand">
+    <img src="assets/logo.png" class="logo">
+    <div class="ease">EASE</div>
+    <div class="subtitle">Email Automation System Engine</div>
+    <div class="tagline">Powered by Offices of Nawnit Nihal</div>
+  </div>
+</div>
+
+<div class="right">
+
+<!-- LOGIN -->
+<div class="card" id="loginBox">
+  <h2>Login</h2>
+  <div class="input-group"><input type="text" placeholder="Username"></div>
+  <div class="input-group"><input type="password" placeholder="Password"></div>
+  <button onclick="login()">Login</button>
+  <div class="switch" onclick="showRegister()">Create Account</div>
+</div>
+
+<!-- REGISTER STEP 1 -->
+<div class="card" id="registerStep1" style="display:none;">
+  <h2>Create Account</h2>
+  <div class="input-group"><input type="email" placeholder="Email"></div>
+  <div class="input-group"><input type="password" placeholder="Password"></div>
+  <button onclick="nextStep()">Continue</button>
+  <div class="switch" onclick="showLogin()">Back</div>
+</div>
+
+<!-- REGISTER STEP 2 -->
+<div class="card" id="registerStep2" style="display:none;">
+  <h2>Connect Email</h2>
+
+  <div class="permission-box">
+    ✔ Read emails<br>
+    ✔ Send replies<br>
+    ✔ Create tickets
   </div>
 
-  <!-- RIGHT -->
-  <div class="right">
+  <!-- OAUTH -->
+  <button class="oauth-btn" onclick="connectGmail()">Connect Gmail</button>
+  <button class="oauth-btn" onclick="connectOutlook()">Connect Outlook</button>
 
-    <!-- LOGIN -->
-    <div class="card" id="loginBox">
-      <h2>Login</h2>
+  <div class="switch" onclick="showIMAP()">Use IMAP instead</div>
+</div>
 
-      <div class="input-group">
-        <input type="text" placeholder="Username">
-      </div>
+<!-- IMAP FALLBACK -->
+<div class="card" id="imapBox" style="display:none;">
+  <h2>IMAP Setup</h2>
 
-      <div class="input-group">
-        <input type="password" placeholder="Password">
-      </div>
-
-      <button onclick="login()">Login</button>
-
-      <div class="switch" onclick="showRegister()">
-        Create Account
-      </div>
-    </div>
-
-    <!-- REGISTER STEP 1 -->
-    <div class="card" id="registerStep1" style="display:none;">
-      <h2>Create Account</h2>
-
-      <div class="input-group">
-        <input type="email" placeholder="Email">
-      </div>
-
-      <div class="input-group">
-        <input type="password" placeholder="Password">
-      </div>
-
-      <button onclick="nextStep()">Continue</button>
-
-      <div class="switch" onclick="showLogin()">
-        Back to Login
-      </div>
-    </div>
-
-    <!-- REGISTER STEP 2 -->
-    <div class="card" id="registerStep2" style="display:none;">
-      <h2>Email Access</h2>
-
-      <div class="permission-box">
-        EASE requires permission to:
-        <br><br>
-        ✔ <strong>Read incoming emails</strong><br>
-        ✔ <strong>Send responses automatically</strong><br>
-        ✔ <strong>Convert conversations into tickets</strong>
-      </div>
-
-      <button onclick="completeRegistration()">Allow & Continue</button>
-
-      <div class="switch" onclick="showRegister()">
-        Back
-      </div>
-    </div>
-
+  <div class="input-group">
+    <input id="imapEmail" placeholder="Email">
   </div>
 
+  <div class="input-group">
+    <input id="imapPass" type="password" placeholder="App Password">
+  </div>
+
+  <div class="input-group">
+    <input id="imapServer" placeholder="IMAP Server">
+  </div>
+
+  <div class="input-group">
+    <input id="smtpServer" placeholder="SMTP Server">
+  </div>
+
+  <button onclick="saveIMAP()">Connect</button>
+</div>
+
+</div>
 </div>
 
 <script>
 
+// NAV
 function showRegister(){
-  document.getElementById("loginBox").style.display = "none";
-  document.getElementById("registerStep1").style.display = "block";
-  document.getElementById("registerStep2").style.display = "none";
+  loginBox.style.display="none";
+  registerStep1.style.display="block";
 }
-
 function showLogin(){
-  document.getElementById("loginBox").style.display = "block";
-  document.getElementById("registerStep1").style.display = "none";
-  document.getElementById("registerStep2").style.display = "none";
+  loginBox.style.display="block";
+  registerStep1.style.display="none";
+  registerStep2.style.display="none";
 }
-
 function nextStep(){
-  document.getElementById("registerStep1").style.display = "none";
-  document.getElementById("registerStep2").style.display = "block";
+  registerStep1.style.display="none";
+  registerStep2.style.display="block";
+}
+function showIMAP(){
+  registerStep2.style.display="none";
+  imapBox.style.display="block";
 }
 
-function completeRegistration(){
-  window.location.href = "dashboard.html";
-}
-
+// LOGIN
 function login(){
-  window.location.href = "dashboard.html";
+  window.location.href="dashboard.html";
+}
+
+// OAUTH
+function connectGmail(){
+  window.location.href="https://your-backend.com/auth/gmail";
+}
+
+function connectOutlook(){
+  window.location.href="https://your-backend.com/auth/outlook";
+}
+
+// IMAP SAVE
+function saveIMAP(){
+
+  const data = {
+    email: imapEmail.value,
+    password: imapPass.value,
+    imap: imapServer.value,
+    smtp: smtpServer.value
+  };
+
+  fetch("https://your-backend.com/save-imap", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(()=> {
+    alert("Email connected");
+    window.location.href="dashboard.html";
+  });
+
 }
 
 </script>
