@@ -8,6 +8,10 @@
 <style>
 
 /* ===== GLOBAL ===== */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -15,6 +19,7 @@ body {
   color: #e2e8f0;
 }
 
+/* CENTERING FIX */
 .wrapper {
   min-height: 100vh;
   display: flex;
@@ -36,22 +41,25 @@ body {
 }
 
 .ease {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
   background: linear-gradient(90deg,#3b82f6,#7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* 🔥 GREEN FIX HERE */
 .subtitle {
   font-size: 14px;
-  color: #94a3b8;
+  color: #22c55e; /* green */
+  margin-top: 6px;
 }
 
 .tagline {
   font-size: 13px;
   color: #94a3b8;
   white-space: nowrap;
+  margin-top: 4px;
 }
 
 /* ===== CARD ===== */
@@ -65,23 +73,26 @@ body {
   backdrop-filter: blur(10px);
 }
 
+/* TITLE */
 .card h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* INPUT */
+/* ===== INPUT FIX (PERFECT ALIGNMENT) ===== */
 .input-group {
+  width: 100%;
   margin-bottom: 15px;
 }
 
-input {
+.input-group input {
   width: 100%;
   padding: 12px;
   border-radius: 6px;
   border: none;
   background: #020617;
   color: #e2e8f0;
+  display: block;
 }
 
 /* BUTTON */
@@ -109,7 +120,7 @@ button:hover {
   cursor: pointer;
 }
 
-/* PERMISSION BOX */
+/* PERMISSION TEXT */
 .permission-box {
   font-size: 13px;
   color: #94a3b8;
@@ -174,7 +185,7 @@ button:hover {
     </div>
   </div>
 
-  <!-- REGISTER STEP 2 (PERMISSION) -->
+  <!-- REGISTER STEP 2 -->
   <div class="card" id="registerStep2" style="display:none;">
     <h2>Email Access</h2>
 
@@ -183,9 +194,7 @@ button:hover {
       <br><br>
       ✔ <strong>Read incoming emails</strong><br>
       ✔ <strong>Send responses automatically</strong><br>
-      ✔ <strong>Process conversations into tickets</strong>
-      <br><br>
-      Your credentials are securely used only for automation.
+      ✔ <strong>Convert conversations into tickets</strong>
     </div>
 
     <button onclick="completeRegistration()">Allow & Continue</button>
@@ -217,12 +226,11 @@ function nextStep(){
 }
 
 function completeRegistration(){
-  alert("Registration flow will connect to backend next");
+  alert("Backend connection next");
   window.location.href = "dashboard.html";
 }
 
 function login(){
-  alert("Login will connect to backend next");
   window.location.href = "dashboard.html";
 }
 
