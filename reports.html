@@ -171,6 +171,7 @@ th, td {
   padding: 10px;
   border-bottom: 1px solid #1e293b;
   font-size: 12px;
+  text-align: left; /* 🔥 ONLY CHANGE */
 }
 
 th { color: #3b82f6; }
@@ -184,20 +185,14 @@ th { color: #3b82f6; }
   color: white;
 }
 
-/* ================= MOBILE ONLY (ADDED) ================= */
+/* ================= MOBILE ONLY (UNCHANGED) ================= */
 @media (max-width: 768px) {
 
-  .sidebar {
-    display: none;
-  }
+  .sidebar { display: none; }
 
-  .layout {
-    flex-direction: column;
-  }
+  .layout { flex-direction: column; }
 
-  .grid {
-    padding: 12px;
-  }
+  .grid { padding: 12px; }
 
   .top-nav {
     overflow-x: auto;
@@ -213,25 +208,15 @@ th { color: #3b82f6; }
     grid-template-columns: 1fr;
   }
 
-  .header {
-    padding: 10px;
-  }
+  .header { padding: 10px; }
 
-  .logo {
-    height: 22px;
-  }
+  .logo { height: 22px; }
 
-  .ease {
-    font-size: 13px;
-  }
+  .ease { font-size: 13px; }
 
-  .tagline {
-    font-size: 9px;
-  }
+  .tagline { font-size: 9px; }
 
-  .header-stats {
-    font-size: 10px;
-  }
+  .header-stats { font-size: 10px; }
 
   .user-badge {
     font-size: 10px;
@@ -239,7 +224,6 @@ th { color: #3b82f6; }
   }
 
 }
-/* ===================================================== */
 
 </style>
 </head>
@@ -248,7 +232,6 @@ th { color: #3b82f6; }
 
 <div class="layout">
 
-<!-- SIDEBAR -->
 <div class="sidebar">
   <h2>EASE</h2>
   <div class="nav-item" onclick="go('dashboard.html')">Dashboard</div>
@@ -259,7 +242,6 @@ th { color: #3b82f6; }
 
 <div class="main">
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-top">
     <div class="brand-wrap">
@@ -287,7 +269,6 @@ th { color: #3b82f6; }
   </div>
 </div>
 
-<!-- CONTENT -->
 <div class="grid">
 
   <div class="module-grid">
