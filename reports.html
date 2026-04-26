@@ -40,12 +40,7 @@ body { margin:0; font-family:'Segoe UI',sans-serif; background:#020617; color:#e
   cursor:pointer;
 }
 
-/* CLICK STATE */
-.module-card.selected{
-  border:1px solid #facc15;
-}
-
-/* LOADED STATE */
+.module-card.selected{border:1px solid #facc15;}
 .module-card.loaded{
   background:rgba(59,130,246,0.25);
   border:1px solid #3b82f6;
@@ -73,6 +68,39 @@ th{color:#3b82f6;}
 .grid{padding:12px;}
 .module-grid{grid-template-columns:1fr;}
 }
+
+/* 🔥 LOADER */
+.loader-overlay{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(2,6,23,0.6);
+backdrop-filter:blur(8px);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+opacity:0;
+visibility:hidden;
+transition:0.2s;
+}
+.loader-overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+.loader-spinner{
+width:50px;height:50px;
+border:4px solid rgba(59,130,246,0.2);
+border-top:4px solid #3b82f6;
+border-radius:50%;
+animation:spin 0.8s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
 </style>
 </head>
 
@@ -128,66 +156,76 @@ th{color:#3b82f6;}
 </div>
 </div>
 
+<!-- LOADER -->
+<div id="loaderOverlay" class="loader-overlay">
+<div class="loader-spinner"></div>
+</div>
+
 <script>
 
 const API="https://script.google.com/macros/s/AKfycbwTJijz81CxBrY0_YrKH3dK5erasji0gHX6Kuo5rVFgS5u0lBMiNiV4AtGcdtSyUHCt/exec";
 const ROLE="admin";
-
-/* 🔥 CACHE (10x speed boost) */
 const CACHE={};
+
+function showLoader(){
+document.getElementById("loaderOverlay").classList.add("active");
+}
+
+function hideLoader(){
+document.getElementById("loaderOverlay").classList.remove("active");
+}
 
 async function loadTable(type,el){
 
-// instant selection feedback
 document.querySelectorAll(".module-card").forEach(c=>{
-  c.classList.remove("selected","loaded");
+c.classList.remove("selected","loaded");
 });
 el.classList.add("selected");
 
-// restrict users
 if(type==="users" && ROLE!=="admin"){
-  alert("Access restricted");
-  return;
+alert("Access restricted");
+return;
 }
 
-// ⚡ USE CACHE
+showLoader();
+
 let data;
 if(CACHE[type]){
-  data=CACHE[type];
+data=CACHE[type];
 }else{
-  const res=await fetch(`${API}?type=${type}`);
-  data=await res.json();
-  CACHE[type]=data;
+const res=await fetch(`${API}?type=${type}`);
+data=await res.json();
+CACHE[type]=data;
 }
 
 if(!data || data.length===0){
-  document.getElementById("tableArea").innerHTML="No Data";
-  return;
+document.getElementById("tableArea").innerHTML="No Data";
+hideLoader();
+return;
 }
 
 const headers=Object.keys(data[0]);
 
 let html="<table><tr>";
-
 for(let h of headers){ html+=`<th>${h}</th>`; }
 html+="</tr>";
 
 for(let row of data){
-  html+="<tr>";
-  for(let h of headers){
-    html+=`<td>${row[h]||""}</td>`;
-  }
-  html+="</tr>";
+html+="<tr>";
+for(let h of headers){
+html+=`<td>${row[h]||""}</td>`;
+}
+html+="</tr>";
 }
 
 html+="</table><button class='print-btn' onclick='window.print()'>Print</button>";
 
 document.getElementById("tableArea").innerHTML=html;
 
-// mark as loaded
 el.classList.remove("selected");
 el.classList.add("loaded");
 
+hideLoader();
 }
 
 function go(page){window.location.href=page;}
