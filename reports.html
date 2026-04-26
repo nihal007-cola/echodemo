@@ -149,10 +149,9 @@ body {
   text-align: center;
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  transition: all 0.2s ease;
 }
 
-/* 🔥 ACTIVE CARD */
+/* 🔥 ACTIVE AFTER LOAD */
 .module-card.active {
   border: 1px solid #3b82f6;
   box-shadow: 0 0 25px rgba(59,130,246,0.4);
@@ -274,10 +273,6 @@ const ROLE = "admin";
 
 async function loadTable(type, el){
 
-  // 🔥 highlight selection
-  document.querySelectorAll(".module-card").forEach(c => c.classList.remove("active"));
-  el.classList.add("active");
-
   if(type === "users" && ROLE !== "admin"){
     alert("Access restricted");
     return;
@@ -293,7 +288,6 @@ async function loadTable(type, el){
 
   const headers = Object.keys(data[0]);
 
-  // 🔥 FAST BUILD (buffer)
   let html = "<table><tr>";
 
   for(let i=0;i<headers.length;i++){
@@ -314,6 +308,10 @@ async function loadTable(type, el){
   html += `<button class="print-btn" onclick="window.print()">Print</button>`;
 
   document.getElementById("tableArea").innerHTML = html;
+
+  /* 🔥 highlight AFTER load */
+  document.querySelectorAll(".module-card").forEach(c => c.classList.remove("active"));
+  el.classList.add("active");
 }
 
 function go(page){
