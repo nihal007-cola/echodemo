@@ -41,7 +41,7 @@ body {
 
 .main { flex: 1; }
 
-/* ===== HEADER ===== */
+/* ===== HEADER (UNCHANGED) ===== */
 .header {
   position: sticky;
   top: 0;
@@ -79,7 +79,7 @@ body {
   white-space: nowrap;
 }
 
-/* RIGHT SIDE (STATS + USER) */
+/* RIGHT SIDE */
 .header-right {
   display: flex;
   align-items: center;
@@ -97,7 +97,7 @@ body {
   font-weight: 600;
 }
 
-/* 🔥 USER INDICATOR */
+/* USER */
 .user-badge {
   padding: 6px 10px;
   border-radius: 8px;
@@ -105,10 +105,9 @@ body {
   border: 1px solid #1e293b;
   font-size: 12px;
   color: #22c55e;
-  backdrop-filter: blur(8px);
 }
 
-/* ===== NAV ===== */
+/* NAV */
 .top-nav {
   margin-top: 10px;
   display: flex;
@@ -136,6 +135,7 @@ body {
   padding: 20px;
 }
 
+/* ===== DASHBOARD ===== */
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
@@ -168,17 +168,6 @@ body {
   cursor: pointer;
 }
 
-/* ===== TICKET ===== */
-.card {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid #1e293b;
-  border-radius: 12px;
-  padding: 20px;
-}
-
-.section { display: none; }
-.section.active { display: block; }
-
 </style>
 </head>
 
@@ -189,10 +178,10 @@ body {
   <!-- SIDEBAR -->
   <div class="sidebar">
     <h2>EASE</h2>
-    <div class="nav-item active" onclick="switchTab('dashboard')">Dashboard</div>
-    <div class="nav-item" onclick="switchTab('tickets')">Tickets</div>
-    <div class="nav-item" onclick="switchTab('reports')">Reports</div>
-    <div class="nav-item" onclick="switchTab('settings')">Settings</div>
+    <div class="nav-item active">Dashboard</div>
+    <div class="nav-item" onclick="go('tickets.html')">Tickets</div>
+    <div class="nav-item" onclick="go('reports.html')">Reports</div>
+    <div class="nav-item" onclick="go('settings.html')">Settings</div>
   </div>
 
   <div class="main">
@@ -209,30 +198,27 @@ body {
           </div>
         </div>
 
-        <!-- 🔥 RIGHT SIDE -->
         <div class="header-right">
           <div class="header-stats">
             Open <span>12</span><br>
             Closed <span>5</span>
           </div>
 
-          <div class="user-badge" id="userBadge">
-            Admin
-          </div>
+          <div class="user-badge">Admin</div>
         </div>
       </div>
 
       <div class="top-nav">
-        <div class="active" onclick="switchTab('dashboard')">Dashboard</div>
-        <div onclick="switchTab('tickets')">Tickets</div>
-        <div onclick="switchTab('reports')">Reports</div>
-        <div onclick="switchTab('settings')">Settings</div>
+        <div class="active">Dashboard</div>
+        <div onclick="go('tickets.html')">Tickets</div>
+        <div onclick="go('reports.html')">Reports</div>
+        <div onclick="go('settings.html')">Settings</div>
       </div>
 
     </div>
 
-    <!-- DASHBOARD -->
-    <div id="dashboard" class="section active grid">
+    <!-- DASHBOARD ONLY -->
+    <div class="grid">
       <div class="dashboard-grid">
 
         <div class="stat-card yellow">
@@ -260,35 +246,17 @@ body {
       </div>
     </div>
 
-    <!-- TICKETS -->
-    <div id="tickets" class="section grid">
-      <div class="card">
-        <h3>TKT-0001</h3>
-        GST Plan | Mumbai<br>
-        Rahul Sharma
-      </div>
-    </div>
-
   </div>
 </div>
 
 <script>
 
-function switchTab(tab){
-  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(tab).classList.add("active");
-
-  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
-  document.querySelectorAll(".top-nav div").forEach(n=>n.classList.remove("active"));
-
-  document.querySelectorAll(`[onclick*="${tab}"]`).forEach(n=>n.classList.add("active"));
+function go(page){
+  window.location.href = page;
 }
 
-/* 🔥 USER (DYNAMIC READY) */
-document.getElementById("userBadge").innerText = "Admin"; // change from backend
-
 function refreshData(){
-  console.log("API CALL");
+  console.log("API CALL → backend");
 }
 
 setInterval(refreshData, 300000);
