@@ -8,9 +8,7 @@
 <style>
 
 /* ===== GLOBAL ===== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -25,7 +23,7 @@ body {
   min-height: 100vh;
 }
 
-/* ===== LEFT (DESKTOP BRAND PANEL) ===== */
+/* LEFT */
 .left {
   width: 50%;
   display: flex;
@@ -34,9 +32,7 @@ body {
   background: radial-gradient(circle at top, #0f172a, #020617);
 }
 
-.brand {
-  text-align: center;
-}
+.brand { text-align: center; }
 
 .logo {
   width: 110px;
@@ -64,7 +60,7 @@ body {
   white-space: nowrap;
 }
 
-/* ===== RIGHT (FORM PANEL) ===== */
+/* RIGHT */
 .right {
   width: 50%;
   display: flex;
@@ -72,7 +68,7 @@ body {
   align-items: center;
 }
 
-/* ===== CARD ===== */
+/* CARD */
 .card {
   width: 100%;
   max-width: 360px;
@@ -89,9 +85,7 @@ body {
 }
 
 /* INPUT */
-.input-group {
-  margin-bottom: 15px;
-}
+.input-group { margin-bottom: 15px; }
 
 input {
   width: 100%;
@@ -114,9 +108,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.9;
-}
+button:hover { opacity: 0.9; }
 
 /* SWITCH */
 .switch {
@@ -127,7 +119,7 @@ button:hover {
   cursor: pointer;
 }
 
-/* PERMISSION TEXT */
+/* PERMISSION */
 .permission-box {
   font-size: 13px;
   color: #94a3b8;
@@ -135,23 +127,19 @@ button:hover {
   line-height: 1.5;
 }
 
-.permission-box strong {
-  color: #e2e8f0;
-}
+.permission-box strong { color: #e2e8f0; }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media (max-width: 768px) {
 
   .container {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 20px;
   }
 
   .left {
     width: 100%;
-    height: auto;
     margin-bottom: 20px;
   }
 
@@ -159,13 +147,8 @@ button:hover {
     width: 100%;
   }
 
-  .logo {
-    width: 90px;
-  }
-
-  .ease {
-    font-size: 28px;
-  }
+  .logo { width: 90px; }
+  .ease { font-size: 28px; }
 
 }
 
@@ -176,7 +159,7 @@ button:hover {
 
 <div class="container">
 
-  <!-- LEFT PANEL -->
+  <!-- LEFT -->
   <div class="left">
     <div class="brand">
       <img src="assets/logo.png" class="logo">
@@ -186,7 +169,7 @@ button:hover {
     </div>
   </div>
 
-  <!-- RIGHT PANEL -->
+  <!-- RIGHT -->
   <div class="right">
 
     <!-- LOGIN -->
@@ -213,7 +196,7 @@ button:hover {
       <h2>Create Account</h2>
 
       <div class="input-group">
-        <input type="text" placeholder="Username">
+        <input type="email" placeholder="Email">
       </div>
 
       <div class="input-group">
