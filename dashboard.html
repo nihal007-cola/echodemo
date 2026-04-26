@@ -19,7 +19,7 @@ body {
   display: flex;
 }
 
-/* ===== SIDEBAR ===== */
+/* ===== SIDEBAR (DESKTOP ONLY) ===== */
 .sidebar {
   width: 220px;
   height: 100vh;
@@ -49,7 +49,7 @@ body {
   flex: 1;
 }
 
-/* ===== STICKY HEADER ===== */
+/* ===== HEADER ===== */
 .header {
   position: sticky;
   top: 0;
@@ -58,38 +58,48 @@ body {
   border-bottom: 1px solid #1e293b;
   padding: 10px 20px;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* HEADER TOP */
+.header-top {
+  display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* LEFT HEADER */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .logo {
-  height: 35px;
+  height: 30px;
 }
 
+/* BRAND INLINE FIX */
 .brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-.brand .ease {
+.ease {
   font-size: 16px;
   font-weight: bold;
   color: #7c3aed;
 }
 
-.brand .tagline {
-  font-size: 11px;
+/* NO BREAK LINE GUARANTEE */
+.tagline {
+  font-size: 12px;
   color: #94a3b8;
+  white-space: nowrap;
 }
 
-/* RIGHT HEADER */
+/* RIGHT */
 .header-right {
   font-size: 13px;
   color: #94a3b8;
@@ -98,6 +108,24 @@ body {
 .header-right span {
   color: #3b82f6;
   font-weight: bold;
+}
+
+/* ===== TOP NAV (MOBILE) ===== */
+.top-nav {
+  display: none;
+  gap: 15px;
+  font-size: 13px;
+  color: #94a3b8;
+  overflow-x: auto;
+}
+
+.top-nav div {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.top-nav div:hover {
+  color: white;
 }
 
 /* ===== GRID ===== */
@@ -114,14 +142,12 @@ body {
   border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 20px;
-  backdrop-filter: blur(10px);
 }
 
 .card h3 {
   margin: 0;
 }
 
-/* META */
 .meta {
   font-size: 13px;
   color: #94a3b8;
@@ -167,8 +193,16 @@ body {
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
+  .layout {
+    flex-direction: column;
+  }
+
   .sidebar {
     display: none;
+  }
+
+  .top-nav {
+    display: flex;
   }
 
   .grid {
@@ -199,17 +233,30 @@ body {
     <!-- HEADER -->
     <div class="header">
 
-      <div class="header-left">
-        <img src="assets/logo.png" class="logo">
+      <!-- TOP LINE -->
+      <div class="header-top">
 
-        <div class="brand">
-          <div class="ease">EASE</div>
-          <div class="tagline">Powered by Offices of Nawnit Nihal</div>
+        <div class="header-left">
+          <img src="assets/logo.png" class="logo">
+
+          <div class="brand">
+            <div class="ease">EASE</div>
+            <div class="tagline">Powered by Offices of Nawnit Nihal</div>
+          </div>
         </div>
+
+        <div class="header-right">
+          Open: <span>12</span> | Closed: <span>5</span>
+        </div>
+
       </div>
 
-      <div class="header-right">
-        Open: <span>12</span> | Closed: <span>5</span>
+      <!-- MOBILE NAV -->
+      <div class="top-nav">
+        <div>Dashboard</div>
+        <div>Tickets</div>
+        <div>Reports</div>
+        <div>Settings</div>
       </div>
 
     </div>
@@ -217,19 +264,14 @@ body {
     <!-- GRID -->
     <div class="grid">
 
-      <!-- CARD -->
       <div class="card">
         <h3>TKT-0001</h3>
-
         <div class="meta">GST Plan | Mumbai</div>
-
         <div class="client">
           Client: <span>Rahul Sharma</span><br>
           📞 +91 9876543210
         </div>
-
         <div class="status green">Active</div>
-
         <div class="actions">
           <button class="follow">Follow-up</button>
           <button class="custom">Custom Mail</button>
@@ -239,19 +281,14 @@ body {
         </div>
       </div>
 
-      <!-- CARD -->
       <div class="card">
         <h3>TKT-0002</h3>
-
         <div class="meta">Virtual Office | Delhi</div>
-
         <div class="client">
           Client: <span>Anjali Mehta</span><br>
           📞 +91 9123456780
         </div>
-
         <div class="status yellow">Pending</div>
-
         <div class="actions">
           <button class="follow">Follow-up</button>
           <button class="custom">Custom Mail</button>
@@ -261,19 +298,14 @@ body {
         </div>
       </div>
 
-      <!-- CARD -->
       <div class="card">
         <h3>TKT-0003</h3>
-
         <div class="meta">Mailing Address | Bangalore</div>
-
         <div class="client">
           Client: <span>Vikram Rao</span><br>
           📞 +91 9988776655
         </div>
-
         <div class="status red">Attention Needed</div>
-
         <div class="actions">
           <button class="follow">Follow-up</button>
           <button class="custom">Custom Mail</button>
