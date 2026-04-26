@@ -189,55 +189,14 @@ body {
 .print { background:#1e293b; color:white; }
 .refresh { background:#f43f5e; color:white; }
 
-/* ================= MOBILE ONLY (ADDED) ================= */
+/* MOBILE */
 @media (max-width: 768px) {
 
-  .sidebar {
-    display: none;
-  }
+  .sidebar { display:none; }
+  .layout { flex-direction: column; }
+  .grid { padding: 12px; }
 
-  .layout {
-    flex-direction: column;
-  }
-
-  .grid {
-    padding: 12px;
-  }
-
-  .top-nav {
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .top-nav div {
-    font-size: 12px;
-    padding: 5px 10px;
-  }
-
-  .header {
-    padding: 10px;
-  }
-
-  .logo {
-    height: 22px;
-  }
-
-  .ease {
-    font-size: 13px;
-  }
-
-  .tagline {
-    font-size: 9px;
-  }
-
-  .header-stats {
-    font-size: 10px;
-  }
-
-  .user-badge {
-    font-size: 10px;
-    padding: 4px 6px;
-  }
+  .top-nav { overflow-x:auto; white-space:nowrap; }
 
   .actions button {
     font-size: 11px;
@@ -245,7 +204,6 @@ body {
   }
 
 }
-/* ===================================================== */
 
 </style>
 </head>
@@ -254,7 +212,6 @@ body {
 
 <div class="layout">
 
-<!-- SIDEBAR -->
 <div class="sidebar">
   <h2>EASE</h2>
   <div class="nav-item" onclick="go('dashboard.html')">Dashboard</div>
@@ -265,9 +222,7 @@ body {
 
 <div class="main">
 
-<!-- HEADER -->
 <div class="header">
-
   <div class="header-top">
     <div class="brand-wrap">
       <img src="assets/logo.png" class="logo">
@@ -293,85 +248,65 @@ body {
     <div onclick="go('reports.html')">Reports</div>
     <div onclick="go('settings.html')">Settings</div>
   </div>
-
 </div>
 
 <!-- TICKETS -->
-<div class="grid">
-
-  <!-- TICKET 1 -->
-  <div class="ticket-card">
-    <div class="ticket-title">TKT-0001</div>
-    <div class="meta">GST Plan | Mumbai</div>
-
-    <div class="client">
-      Client: <span>Rahul Sharma</span><br>
-      📞 +91 9876543210
-    </div>
-
-    <div class="status green">Active</div>
-
-    <div class="actions">
-      <button class="follow">Follow-up</button>
-      <button class="custom">Custom Mail</button>
-      <button class="history">History</button>
-      <button class="print">Print</button>
-      <button class="refresh">Refresh</button>
-    </div>
-  </div>
-
-  <!-- TICKET 2 -->
-  <div class="ticket-card">
-    <div class="ticket-title">TKT-0002</div>
-    <div class="meta">Virtual Office | Delhi</div>
-
-    <div class="client">
-      Client: <span>Anjali Mehta</span><br>
-      📞 +91 9123456780
-    </div>
-
-    <div class="status yellow">Pending</div>
-
-    <div class="actions">
-      <button class="follow">Follow-up</button>
-      <button class="custom">Custom Mail</button>
-      <button class="history">History</button>
-      <button class="print">Print</button>
-      <button class="refresh">Refresh</button>
-    </div>
-  </div>
-
-  <!-- TICKET 3 -->
-  <div class="ticket-card">
-    <div class="ticket-title">TKT-0003</div>
-    <div class="meta">Mailing Address | Bangalore</div>
-
-    <div class="client">
-      Client: <span>Amit Verma</span><br>
-      📞 +91 9988776655
-    </div>
-
-    <div class="status red">Attention Needed</div>
-
-    <div class="actions">
-      <button class="follow">Follow-up</button>
-      <button class="custom">Custom Mail</button>
-      <button class="history">History</button>
-      <button class="print">Print</button>
-      <button class="refresh">Refresh</button>
-    </div>
-  </div>
-
-</div>
+<div class="grid" id="ticketContainer"></div>
 
 </div>
 </div>
 
 <script>
 
+const API = "https://script.google.com/macros/s/AKfycbwTJijz81CxBrY0_YrKH3dK5erasji0gHX6Kuo5rVFgS5u0lBMiNiV4AtGcdtSyUHCt/exec";
+
 function go(page){
   window.location.href = page;
 }
+
+/* LOAD TICKETS */
+async function loadTickets(){
+
+  const res = await fetch(`${API}?type=tickets`);
+  const data = await res.json();
+
+  let html = "";
+
+  data.forEach(t => {
+
+    let statusClass = "green";
+    if(t.Priority === "YELLOW") statusClass = "yellow";
+    if(t.Priority === "RED") statusClass = "red";
+
+    html += `
+    <div class="ticket-card">
+      <div class="ticket-title">${t.Ticket_ID}</div>
+      <div class="meta">${t.Service || "-"} | ${t.Location || "-"}</div>
+
+      <div class="client">
+        Client: <span>${t.Name || "-"}</span><br>
+        📧 ${t.Sender_Email || "-"}
+      </div>
+
+      <div class="status ${statusClass}">
+        ${t.Status || "-"}
+      </div>
+
+      <div class="actions">
+        <button class="follow">Follow-up</button>
+        <button class="custom">Custom Mail</button>
+        <button class="history">History</button>
+        <button class="print">Print</button>
+        <button class="refresh" onclick="loadTickets()">Refresh</button>
+      </div>
+    </div>
+    `;
+  });
+
+  document.getElementById("ticketContainer").innerHTML = html;
+}
+
+loadTickets();
 
 </script>
 
