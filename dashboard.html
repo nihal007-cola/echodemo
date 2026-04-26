@@ -15,9 +15,7 @@ body {
   color: #e2e8f0;
 }
 
-.layout {
-  display: flex;
-}
+.layout { display: flex; }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
@@ -39,14 +37,9 @@ body {
   cursor: pointer;
 }
 
-.nav-item:hover {
-  color: white;
-}
+.nav-item.active { color: white; }
 
-/* ===== MAIN ===== */
-.main {
-  flex: 1;
-}
+.main { flex: 1; }
 
 /* ===== HEADER ===== */
 .header {
@@ -58,7 +51,6 @@ body {
   padding: 12px 16px;
 }
 
-/* TOP */
 .header-top {
   display: flex;
   justify-content: space-between;
@@ -71,14 +63,9 @@ body {
   gap: 10px;
 }
 
-.logo {
-  height: 28px;
-}
+.logo { height: 28px; }
 
-.brand-text {
-  display: flex;
-  flex-direction: column;
-}
+.brand-text { display: flex; flex-direction: column; }
 
 .ease {
   font-size: 15px;
@@ -92,7 +79,13 @@ body {
   white-space: nowrap;
 }
 
-/* STATS */
+/* RIGHT SIDE (STATS + USER) */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .header-stats {
   text-align: right;
   font-size: 12px;
@@ -104,34 +97,36 @@ body {
   font-weight: 600;
 }
 
-/* ===== GLASS NAV ===== */
+/* 🔥 USER INDICATOR */
+.user-badge {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid #1e293b;
+  font-size: 12px;
+  color: #22c55e;
+  backdrop-filter: blur(8px);
+}
+
+/* ===== NAV ===== */
 .top-nav {
   margin-top: 10px;
   display: flex;
   gap: 12px;
   padding: 8px;
-
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255,255,255,0.05);
   border-radius: 10px;
-
-  box-shadow:
-    0 0 15px rgba(59,130,246,0.1),
-    inset 0 0 10px rgba(124,58,237,0.05);
 }
 
 .top-nav div {
   padding: 6px 12px;
   border-radius: 6px;
-  font-size: 13px;
   color: #94a3b8;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.top-nav div:hover {
+.top-nav div.active {
   color: white;
   background: rgba(59,130,246,0.15);
 }
@@ -139,143 +134,50 @@ body {
 /* ===== GRID ===== */
 .grid {
   padding: 20px;
+}
+
+.dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
   gap: 20px;
 }
 
-/* ===== CARD ===== */
+.stat-card {
+  background: rgba(15,23,42,0.7);
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.stat-card h2 { margin: 0; font-size: 32px; }
+
+.yellow { color: #facc15; }
+.green { color: #22c55e; }
+.red { color: #ef4444; }
+.blue { color: #3b82f6; }
+
+.refresh-btn {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+}
+
+/* ===== TICKET ===== */
 .card {
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
-.card h3 {
-  margin: 0;
-}
-
-.meta {
-  font-size: 13px;
-  color: #94a3b8;
-  margin: 6px 0;
-}
-
-/* CLIENT */
-.client {
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.client span {
-  color: #3b82f6;
-}
-
-.phone {
-  color: #94a3b8;
-  text-decoration: none;
-}
-
-.phone:hover {
-  color: white;
-}
-
-/* STATUS */
-.status {
-  font-size: 12px;
-  margin-bottom: 10px;
-}
-
-.green { color: #22c55e; }
-.yellow { color: #facc15; }
-.red { color: #ef4444; }
-
-/* BUTTONS */
-.actions button {
-  margin: 5px 5px 0 0;
-  padding: 8px 10px;
-  border: none;
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.follow { background: #3b82f6; color: white; }
-.custom { background: #7c3aed; color: white; }
-.history { background: #0ea5e9; color: white; }
-.print { background: #1e293b; color: white; }
-.refresh { background: #f43f5e; color: white; }
-
-.actions button:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
-}
-
-/* ===== MODAL ===== */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-}
-
-.modal-content {
-  background: #020617;
-  margin: 8% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 600px;
-  border-radius: 10px;
-  border: 1px solid #1e293b;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.modal-body {
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.message {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.in { background: #0f172a; }
-.out { background: #1e293b; }
-
-/* ===== MOBILE ===== */
-@media (max-width: 768px) {
-
-  .layout {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .top-nav {
-    overflow-x: auto;
-  }
-
-}
+.section { display: none; }
+.section.active { display: block; }
 
 </style>
 </head>
@@ -287,13 +189,12 @@ body {
   <!-- SIDEBAR -->
   <div class="sidebar">
     <h2>EASE</h2>
-    <div class="nav-item">Dashboard</div>
-    <div class="nav-item">Tickets</div>
-    <div class="nav-item">Reports</div>
-    <div class="nav-item">Settings</div>
+    <div class="nav-item active" onclick="switchTab('dashboard')">Dashboard</div>
+    <div class="nav-item" onclick="switchTab('tickets')">Tickets</div>
+    <div class="nav-item" onclick="switchTab('reports')">Reports</div>
+    <div class="nav-item" onclick="switchTab('settings')">Settings</div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
 
     <!-- HEADER -->
@@ -304,82 +205,94 @@ body {
           <img src="assets/logo.png" class="logo">
           <div class="brand-text">
             <div class="ease">EASE</div>
-            <div class="tagline">
-              Powered by Offices of Nawnit&nbsp;Nihal
-            </div>
+            <div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
           </div>
         </div>
 
-        <div class="header-stats">
-          Open <span>12</span><br>
-          Closed <span>5</span>
+        <!-- 🔥 RIGHT SIDE -->
+        <div class="header-right">
+          <div class="header-stats">
+            Open <span>12</span><br>
+            Closed <span>5</span>
+          </div>
+
+          <div class="user-badge" id="userBadge">
+            Admin
+          </div>
         </div>
       </div>
 
-      <!-- GLASS NAV -->
       <div class="top-nav">
-        <div>Dashboard</div>
-        <div>Tickets</div>
-        <div>Reports</div>
-        <div>Settings</div>
+        <div class="active" onclick="switchTab('dashboard')">Dashboard</div>
+        <div onclick="switchTab('tickets')">Tickets</div>
+        <div onclick="switchTab('reports')">Reports</div>
+        <div onclick="switchTab('settings')">Settings</div>
       </div>
 
     </div>
 
-    <!-- GRID -->
-    <div class="grid">
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section active grid">
+      <div class="dashboard-grid">
 
+        <div class="stat-card yellow">
+          <h2>5</h2>
+          Yellow Tickets
+        </div>
+
+        <div class="stat-card green">
+          <h2>12</h2>
+          Green Tickets
+        </div>
+
+        <div class="stat-card red">
+          <h2>3</h2>
+          Red Tickets
+        </div>
+
+        <div class="stat-card blue">
+          <h2>7</h2>
+          Unticketed Emails
+          <br>
+          <button class="refresh-btn" onclick="refreshData()">Refresh</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TICKETS -->
+    <div id="tickets" class="section grid">
       <div class="card">
         <h3>TKT-0001</h3>
-        <div class="meta">GST Plan | Mumbai</div>
-
-        <div class="client">
-          Client: <span>Rahul Sharma</span><br>
-          <a href="tel:+919876543210" class="phone">📞 +91 9876543210</a>
-        </div>
-
-        <div class="status green">Active</div>
-
-        <div class="actions">
-          <button class="follow">Follow-up</button>
-          <button class="custom">Custom Mail</button>
-          <button class="history" onclick="openHistory()">History</button>
-          <button class="print">Print</button>
-          <button class="refresh">Refresh</button>
-        </div>
+        GST Plan | Mumbai<br>
+        Rahul Sharma
       </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-<!-- MODAL -->
-<div id="historyModal" class="modal">
-  <div class="modal-content">
-
-    <div class="modal-header">
-      <span>Conversation History</span>
-      <button onclick="closeModal()">✖</button>
-    </div>
-
-    <div class="modal-body">
-      <div class="message in">Client: Need GST urgently</div>
-      <div class="message out">System: Sharing details</div>
-      <div class="message in">Client: Required documents?</div>
     </div>
 
   </div>
 </div>
 
 <script>
-function openHistory(){
-  document.getElementById("historyModal").style.display = "block";
+
+function switchTab(tab){
+  document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+  document.getElementById(tab).classList.add("active");
+
+  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
+  document.querySelectorAll(".top-nav div").forEach(n=>n.classList.remove("active"));
+
+  document.querySelectorAll(`[onclick*="${tab}"]`).forEach(n=>n.classList.add("active"));
 }
-function closeModal(){
-  document.getElementById("historyModal").style.display = "none";
+
+/* 🔥 USER (DYNAMIC READY) */
+document.getElementById("userBadge").innerText = "Admin"; // change from backend
+
+function refreshData(){
+  console.log("API CALL");
 }
+
+setInterval(refreshData, 300000);
+
 </script>
 
 </body>
