@@ -289,15 +289,31 @@ function go(page){
   window.location.href = page;
 }
 
+/* 🔥 LOADER CONTROL */
+function showLoader(){
+  document.getElementById("loaderOverlay").style.display = "flex";
+}
+
+function hideLoader(){
+  document.getElementById("loaderOverlay").style.display = "none";
+}
+
+/* 🔥 API CALL WITH LOADER */
 function refreshData(){
+  showLoader();
+
   console.log("API CALL → backend");
+
+  setTimeout(() => {
+    hideLoader();
+  }, 800); // simulate API delay (replace with real fetch later)
 }
 
 setInterval(refreshData, 300000);
 
 /* 🔥 HIDE LOADER AFTER PAGE LOAD */
 window.addEventListener("load", function(){
-  document.getElementById("loaderOverlay").style.display = "none";
+  hideLoader();
 });
 
 </script>
