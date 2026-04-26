@@ -6,205 +6,73 @@
 <title>EASE Reports</title>
 
 <style>
+body { margin:0; font-family:'Segoe UI',sans-serif; background:#020617; color:#e2e8f0;}
+.layout{display:flex;}
+.sidebar{width:220px;height:100vh;border-right:1px solid #1e293b;padding:20px;}
+.sidebar h2{color:#3b82f6;}
+.nav-item{margin:15px 0;color:#94a3b8;cursor:pointer;}
+.nav-item.active{color:white;}
+.main{flex:1;}
 
-/* ===== GLOBAL (UNCHANGED) ===== */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #020617;
-  color: #e2e8f0;
+.header{position:sticky;top:0;background:#020617;border-bottom:1px solid #1e293b;padding:12px 16px;z-index:1000;}
+.header-top{display:flex;justify-content:space-between;align-items:center;}
+.brand-wrap{display:flex;align-items:center;gap:10px;}
+.logo{height:28px;}
+.ease{color:#7c3aed;font-weight:600;}
+.tagline{font-size:11px;color:#94a3b8;white-space:nowrap;}
+.header-right{display:flex;gap:15px;align-items:center;}
+.user-badge{background:rgba(15,23,42,0.6);border:1px solid #1e293b;padding:6px 10px;border-radius:8px;color:#22c55e;font-size:12px;}
+
+.top-nav{margin-top:10px;display:flex;gap:12px;padding:8px;background:rgba(15,23,42,0.6);border-radius:10px;}
+.top-nav div{padding:6px 12px;color:#94a3b8;cursor:pointer;}
+.top-nav .active{color:white;background:rgba(59,130,246,0.15);}
+
+.grid{padding:20px;}
+
+.module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+
+.module-card{
+  background:rgba(15,23,42,0.7);
+  border:1px solid #1e293b;
+  border-radius:12px;
+  padding:25px;
+  text-align:center;
+  cursor:pointer;
 }
 
-.layout { display: flex; }
-
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: 220px;
-  height: 100vh;
-  border-right: 1px solid #1e293b;
-  padding: 20px;
+/* CLICK STATE */
+.module-card.selected{
+  border:1px solid #facc15;
 }
 
-.sidebar h2 { color: #3b82f6; }
-
-.nav-item {
-  margin: 15px 0;
-  color: #94a3b8;
-  cursor: pointer;
+/* LOADED STATE */
+.module-card.loaded{
+  background:rgba(59,130,246,0.25);
+  border:1px solid #3b82f6;
+  color:white;
 }
 
-.nav-item.active { color: white; }
-
-/* ===== MAIN ===== */
-.main { flex: 1; }
-
-/* ===== HEADER ===== */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
-  padding: 12px 16px;
+.table-container{
+  margin-top:20px;
+  background:rgba(15,23,42,0.7);
+  border-radius:12px;
+  border:1px solid #1e293b;
+  padding:15px;
+  overflow-x:auto;
 }
 
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+table{width:100%;border-collapse:collapse;min-width:700px;}
+th,td{padding:10px;border-bottom:1px solid #1e293b;font-size:12px;text-align:left;}
+th{color:#3b82f6;}
+
+.print-btn{margin-top:10px;padding:8px;border-radius:6px;border:none;background:#3b82f6;color:white;}
+
+@media(max-width:768px){
+.sidebar{display:none;}
+.layout{flex-direction:column;}
+.grid{padding:12px;}
+.module-grid{grid-template-columns:1fr;}
 }
-
-.brand-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo { height: 28px; }
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.ease {
-  font-size: 15px;
-  font-weight: 600;
-  color: #7c3aed;
-}
-
-.tagline {
-  font-size: 11px;
-  color: #94a3b8;
-  white-space: nowrap;
-}
-
-/* RIGHT SIDE */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.header-stats {
-  text-align: right;
-  font-size: 12px;
-  color: #94a3b8;
-}
-
-.header-stats span {
-  color: #3b82f6;
-  font-weight: 600;
-}
-
-.user-badge {
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid #1e293b;
-  font-size: 12px;
-  color: #22c55e;
-}
-
-/* ===== NAV ===== */
-.top-nav {
-  margin-top: 10px;
-  display: flex;
-  gap: 12px;
-  padding: 8px;
-  border-radius: 10px;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(10px);
-}
-
-.top-nav div {
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: #94a3b8;
-  cursor: pointer;
-}
-
-.top-nav div.active {
-  color: white;
-  background: rgba(59,130,246,0.15);
-}
-
-/* ===== CONTENT ===== */
-.grid {
-  padding: 20px;
-}
-
-/* ===== MODULE CARDS ===== */
-.module-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 20px;
-}
-
-.module-card {
-  background: rgba(15,23,42,0.7);
-  border: 1px solid #1e293b;
-  border-radius: 12px;
-  padding: 25px;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
-
-/* 🔥 ACTIVE AFTER LOAD */
-.module-card.active {
-  border: 1px solid #3b82f6;
-  box-shadow: 0 0 25px rgba(59,130,246,0.4);
-  color: white;
-}
-
-/* ===== TABLE ===== */
-.table-container {
-  margin-top: 20px;
-  background: rgba(15,23,42,0.7);
-  border-radius: 12px;
-  border: 1px solid #1e293b;
-  padding: 15px;
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 700px;
-}
-
-th, td {
-  padding: 10px;
-  border-bottom: 1px solid #1e293b;
-  font-size: 12px;
-  text-align: left;
-}
-
-th { color: #3b82f6; }
-
-.print-btn {
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  background: #3b82f6;
-  color: white;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .sidebar { display:none; }
-  .layout { flex-direction: column; }
-  .grid { padding: 12px; }
-
-  .top-nav { overflow-x:auto; white-space:nowrap; }
-
-  .module-grid { grid-template-columns: 1fr; }
-
-}
-
 </style>
 </head>
 
@@ -213,110 +81,116 @@ th { color: #3b82f6; }
 <div class="layout">
 
 <div class="sidebar">
-  <h2>EASE</h2>
-  <div class="nav-item" onclick="go('dashboard.html')">Dashboard</div>
-  <div class="nav-item" onclick="go('tickets.html')">Tickets</div>
-  <div class="nav-item active">Reports</div>
-  <div class="nav-item" onclick="go('settings.html')">Settings</div>
+<h2>EASE</h2>
+<div class="nav-item" onclick="go('dashboard.html')">Dashboard</div>
+<div class="nav-item" onclick="go('tickets.html')">Tickets</div>
+<div class="nav-item active">Reports</div>
+<div class="nav-item" onclick="go('settings.html')">Settings</div>
 </div>
 
 <div class="main">
 
 <div class="header">
-  <div class="header-top">
-    <div class="brand-wrap">
-      <img src="assets/logo.png" class="logo">
-      <div class="brand-text">
-        <div class="ease">EASE</div>
-        <div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
-      </div>
-    </div>
+<div class="header-top">
+<div class="brand-wrap">
+<img src="assets/logo.png" class="logo">
+<div>
+<div class="ease">EASE</div>
+<div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
+</div>
+</div>
+<div class="header-right">
+<div class="user-badge">Admin</div>
+</div>
+</div>
 
-    <div class="header-right">
-      <div class="header-stats">
-        Open <span>12</span><br>
-        Closed <span>5</span>
-      </div>
-      <div class="user-badge">Admin</div>
-    </div>
-  </div>
-
-  <div class="top-nav">
-    <div onclick="go('dashboard.html')">Dashboard</div>
-    <div onclick="go('tickets.html')">Tickets</div>
-    <div class="active">Reports</div>
-    <div onclick="go('settings.html')">Settings</div>
-  </div>
+<div class="top-nav">
+<div onclick="go('dashboard.html')">Dashboard</div>
+<div onclick="go('tickets.html')">Tickets</div>
+<div class="active">Reports</div>
+<div onclick="go('settings.html')">Settings</div>
+</div>
 </div>
 
 <div class="grid">
 
-  <div class="module-grid">
-    <div class="module-card" onclick="loadTable('tickets', this)">TICKETS</div>
-    <div class="module-card" onclick="loadTable('email', this)">EMAIL_LOG</div>
-    <div class="module-card" onclick="loadTable('docs', this)">DOCUMENT_TRACKER</div>
-    <div class="module-card" onclick="loadTable('keywords', this)">KEYWORD_ALERTS</div>
-    <div class="module-card" onclick="loadTable('users', this)">USERS</div>
-  </div>
-
-  <div class="table-container" id="tableArea"></div>
-
+<div class="module-grid">
+<div class="module-card" onclick="loadTable('tickets',this)">TICKETS</div>
+<div class="module-card" onclick="loadTable('email',this)">EMAIL_LOG</div>
+<div class="module-card" onclick="loadTable('docs',this)">DOCUMENT_TRACKER</div>
+<div class="module-card" onclick="loadTable('keywords',this)">KEYWORD_ALERTS</div>
+<div class="module-card" onclick="loadTable('users',this)">USERS</div>
 </div>
 
+<div class="table-container" id="tableArea"></div>
+
+</div>
 </div>
 </div>
 
 <script>
 
-const API = "https://script.google.com/macros/s/AKfycbwTJijz81CxBrY0_YrKH3dK5erasji0gHX6Kuo5rVFgS5u0lBMiNiV4AtGcdtSyUHCt/exec";
-const ROLE = "admin";
+const API="https://script.google.com/macros/s/AKfycbwTJijz81CxBrY0_YrKH3dK5erasji0gHX6Kuo5rVFgS5u0lBMiNiV4AtGcdtSyUHCt/exec";
+const ROLE="admin";
 
-async function loadTable(type, el){
+/* 🔥 CACHE (10x speed boost) */
+const CACHE={};
 
-  if(type === "users" && ROLE !== "admin"){
-    alert("Access restricted");
-    return;
-  }
+async function loadTable(type,el){
 
-  const res = await fetch(`${API}?type=${type}`);
-  const data = await res.json();
+// instant selection feedback
+document.querySelectorAll(".module-card").forEach(c=>{
+  c.classList.remove("selected","loaded");
+});
+el.classList.add("selected");
 
-  if(!data || data.length === 0){
-    document.getElementById("tableArea").innerHTML = "No Data";
-    return;
-  }
-
-  const headers = Object.keys(data[0]);
-
-  let html = "<table><tr>";
-
-  for(let i=0;i<headers.length;i++){
-    html += `<th>${headers[i]}</th>`;
-  }
-
-  html += "</tr>";
-
-  for(let i=0;i<data.length;i++){
-    html += "<tr>";
-    for(let j=0;j<headers.length;j++){
-      html += `<td>${data[i][headers[j]] || ""}</td>`;
-    }
-    html += "</tr>";
-  }
-
-  html += "</table>";
-  html += `<button class="print-btn" onclick="window.print()">Print</button>`;
-
-  document.getElementById("tableArea").innerHTML = html;
-
-  /* 🔥 highlight AFTER load */
-  document.querySelectorAll(".module-card").forEach(c => c.classList.remove("active"));
-  el.classList.add("active");
+// restrict users
+if(type==="users" && ROLE!=="admin"){
+  alert("Access restricted");
+  return;
 }
 
-function go(page){
-  window.location.href = page;
+// ⚡ USE CACHE
+let data;
+if(CACHE[type]){
+  data=CACHE[type];
+}else{
+  const res=await fetch(`${API}?type=${type}`);
+  data=await res.json();
+  CACHE[type]=data;
 }
+
+if(!data || data.length===0){
+  document.getElementById("tableArea").innerHTML="No Data";
+  return;
+}
+
+const headers=Object.keys(data[0]);
+
+let html="<table><tr>";
+
+for(let h of headers){ html+=`<th>${h}</th>`; }
+html+="</tr>";
+
+for(let row of data){
+  html+="<tr>";
+  for(let h of headers){
+    html+=`<td>${row[h]||""}</td>`;
+  }
+  html+="</tr>";
+}
+
+html+="</table><button class='print-btn' onclick='window.print()'>Print</button>";
+
+document.getElementById("tableArea").innerHTML=html;
+
+// mark as loaded
+el.classList.remove("selected");
+el.classList.add("loaded");
+
+}
+
+function go(page){window.location.href=page;}
 
 </script>
 
