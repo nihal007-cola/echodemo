@@ -19,47 +19,57 @@ body {
   color: #e2e8f0;
 }
 
-/* CENTERING FIX */
-.wrapper {
-  min-height: 100vh;
+/* ===== LAYOUT ===== */
+.container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  min-height: 100vh;
 }
 
-/* ===== BRAND ===== */
+/* ===== LEFT (DESKTOP BRAND PANEL) ===== */
+.left {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+}
+
 .brand {
   text-align: center;
-  margin-bottom: 30px;
 }
 
 .logo {
-  width: 90px;
+  width: 110px;
   margin-bottom: 10px;
 }
 
 .ease {
-  font-size: 30px;
+  font-size: 36px;
   font-weight: bold;
   background: linear-gradient(90deg,#3b82f6,#7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* 🔥 GREEN FIX HERE */
 .subtitle {
-  font-size: 14px;
-  color: #22c55e; /* green */
+  font-size: 15px;
+  color: #22c55e;
   margin-top: 6px;
 }
 
 .tagline {
   font-size: 13px;
   color: #94a3b8;
+  margin-top: 5px;
   white-space: nowrap;
-  margin-top: 4px;
+}
+
+/* ===== RIGHT (FORM PANEL) ===== */
+.right {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ===== CARD ===== */
@@ -73,26 +83,23 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* TITLE */
 .card h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* ===== INPUT FIX (PERFECT ALIGNMENT) ===== */
+/* INPUT */
 .input-group {
-  width: 100%;
   margin-bottom: 15px;
 }
 
-.input-group input {
+input {
   width: 100%;
   padding: 12px;
   border-radius: 6px;
   border: none;
   background: #020617;
   color: #e2e8f0;
-  display: block;
 }
 
 /* BUTTON */
@@ -132,76 +139,113 @@ button:hover {
   color: #e2e8f0;
 }
 
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .left {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .right {
+    width: 100%;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  .ease {
+    font-size: 28px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="wrapper">
+<div class="container">
 
-  <!-- BRAND -->
-  <div class="brand">
-    <img src="assets/logo.png" class="logo">
-    <div class="ease">EASE</div>
-    <div class="subtitle">Email Automation System Engine</div>
-    <div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
-  </div>
-
-  <!-- LOGIN -->
-  <div class="card" id="loginBox">
-    <h2>Login</h2>
-
-    <div class="input-group">
-      <input type="text" placeholder="Username">
-    </div>
-
-    <div class="input-group">
-      <input type="password" placeholder="Password">
-    </div>
-
-    <button onclick="login()">Login</button>
-
-    <div class="switch" onclick="showRegister()">
-      Create Account
+  <!-- LEFT PANEL -->
+  <div class="left">
+    <div class="brand">
+      <img src="assets/logo.png" class="logo">
+      <div class="ease">EASE</div>
+      <div class="subtitle">Email Automation System Engine</div>
+      <div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
     </div>
   </div>
 
-  <!-- REGISTER STEP 1 -->
-  <div class="card" id="registerStep1" style="display:none;">
-    <h2>Create Account</h2>
+  <!-- RIGHT PANEL -->
+  <div class="right">
 
-    <div class="input-group">
-      <input type="text" placeholder="Username">
+    <!-- LOGIN -->
+    <div class="card" id="loginBox">
+      <h2>Login</h2>
+
+      <div class="input-group">
+        <input type="text" placeholder="Username">
+      </div>
+
+      <div class="input-group">
+        <input type="password" placeholder="Password">
+      </div>
+
+      <button onclick="login()">Login</button>
+
+      <div class="switch" onclick="showRegister()">
+        Create Account
+      </div>
     </div>
 
-    <div class="input-group">
-      <input type="password" placeholder="Password">
+    <!-- REGISTER STEP 1 -->
+    <div class="card" id="registerStep1" style="display:none;">
+      <h2>Create Account</h2>
+
+      <div class="input-group">
+        <input type="text" placeholder="Username">
+      </div>
+
+      <div class="input-group">
+        <input type="password" placeholder="Password">
+      </div>
+
+      <button onclick="nextStep()">Continue</button>
+
+      <div class="switch" onclick="showLogin()">
+        Back to Login
+      </div>
     </div>
 
-    <button onclick="nextStep()">Continue</button>
+    <!-- REGISTER STEP 2 -->
+    <div class="card" id="registerStep2" style="display:none;">
+      <h2>Email Access</h2>
 
-    <div class="switch" onclick="showLogin()">
-      Back to Login
+      <div class="permission-box">
+        EASE requires permission to:
+        <br><br>
+        ✔ <strong>Read incoming emails</strong><br>
+        ✔ <strong>Send responses automatically</strong><br>
+        ✔ <strong>Convert conversations into tickets</strong>
+      </div>
+
+      <button onclick="completeRegistration()">Allow & Continue</button>
+
+      <div class="switch" onclick="showRegister()">
+        Back
+      </div>
     </div>
-  </div>
 
-  <!-- REGISTER STEP 2 -->
-  <div class="card" id="registerStep2" style="display:none;">
-    <h2>Email Access</h2>
-
-    <div class="permission-box">
-      EASE requires permission to:
-      <br><br>
-      ✔ <strong>Read incoming emails</strong><br>
-      ✔ <strong>Send responses automatically</strong><br>
-      ✔ <strong>Convert conversations into tickets</strong>
-    </div>
-
-    <button onclick="completeRegistration()">Allow & Continue</button>
-
-    <div class="switch" onclick="showRegister()">
-      Back
-    </div>
   </div>
 
 </div>
@@ -226,7 +270,6 @@ function nextStep(){
 }
 
 function completeRegistration(){
-  alert("Backend connection next");
   window.location.href = "dashboard.html";
 }
 
