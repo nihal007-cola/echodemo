@@ -38,7 +38,7 @@ body {
 /* ===== MAIN ===== */
 .main { flex: 1; }
 
-/* ===== HEADER (UNCHANGED) ===== */
+/* ===== HEADER ===== */
 .header {
   position: sticky;
   top: 0;
@@ -149,6 +149,14 @@ body {
   text-align: center;
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+}
+
+/* 🔥 ACTIVE CARD */
+.module-card.active {
+  border: 1px solid #3b82f6;
+  box-shadow: 0 0 25px rgba(59,130,246,0.4);
+  color: white;
 }
 
 /* ===== TABLE ===== */
@@ -245,11 +253,11 @@ th { color: #3b82f6; }
 <div class="grid">
 
   <div class="module-grid">
-    <div class="module-card" onclick="loadTable('tickets')">TICKETS</div>
-    <div class="module-card" onclick="loadTable('email')">EMAIL_LOG</div>
-    <div class="module-card" onclick="loadTable('docs')">DOCUMENT_TRACKER</div>
-    <div class="module-card" onclick="loadTable('keywords')">KEYWORD_ALERTS</div>
-    <div class="module-card" onclick="loadTable('users')">USERS</div>
+    <div class="module-card" onclick="loadTable('tickets', this)">TICKETS</div>
+    <div class="module-card" onclick="loadTable('email', this)">EMAIL_LOG</div>
+    <div class="module-card" onclick="loadTable('docs', this)">DOCUMENT_TRACKER</div>
+    <div class="module-card" onclick="loadTable('keywords', this)">KEYWORD_ALERTS</div>
+    <div class="module-card" onclick="loadTable('users', this)">USERS</div>
   </div>
 
   <div class="table-container" id="tableArea"></div>
@@ -264,7 +272,11 @@ th { color: #3b82f6; }
 const API = "https://script.google.com/macros/s/AKfycbwTJijz81CxBrY0_YrKH3dK5erasji0gHX6Kuo5rVFgS5u0lBMiNiV4AtGcdtSyUHCt/exec";
 const ROLE = "admin";
 
-async function loadTable(type){
+async function loadTable(type, el){
+
+  // 🔥 highlight selection
+  document.querySelectorAll(".module-card").forEach(c => c.classList.remove("active"));
+  el.classList.add("active");
 
   if(type === "users" && ROLE !== "admin"){
     alert("Access restricted");
@@ -281,18 +293,22 @@ async function loadTable(type){
 
   const headers = Object.keys(data[0]);
 
+  // 🔥 FAST BUILD (buffer)
   let html = "<table><tr>";
 
-  headers.forEach(h=> html += `<th>${h}</th>`);
+  for(let i=0;i<headers.length;i++){
+    html += `<th>${headers[i]}</th>`;
+  }
+
   html += "</tr>";
 
-  data.forEach(row=>{
+  for(let i=0;i<data.length;i++){
     html += "<tr>";
-    headers.forEach(h=>{
-      html += `<td>${row[h] || ""}</td>`;
-    });
+    for(let j=0;j<headers.length;j++){
+      html += `<td>${data[i][headers[j]] || ""}</td>`;
+    }
     html += "</tr>";
-  });
+  }
 
   html += "</table>";
   html += `<button class="print-btn" onclick="window.print()">Print</button>`;
