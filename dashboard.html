@@ -3,204 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EASE Dashboard</title>
+<title>EASE Demo Email</title>
 
 <style>
 
-/* ===== GLOBAL ===== */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #020617;
-  color: #e2e8f0;
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:#020617;
+  color:#e2e8f0;
 }
 
-.layout { display: flex; }
+.layout{display:flex;}
 
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: 220px;
-  height: 100vh;
-  background: #020617;
-  border-right: 1px solid #1e293b;
-  padding: 20px;
+.sidebar{
+  width:220px;
+  height:100vh;
+  border-right:1px solid #1e293b;
+  padding:20px;
 }
 
-.sidebar h2 {
-  color: #3b82f6;
-  margin-bottom: 30px;
+.sidebar h2{color:#3b82f6;}
+
+.nav-item{margin:15px 0;color:#94a3b8;cursor:pointer;}
+.nav-item.active{color:white;}
+
+.main{flex:1;}
+
+.header{
+  position:sticky;
+  top:0;
+  background:#020617;
+  border-bottom:1px solid #1e293b;
+  padding:12px 16px;
+  z-index:1000;
 }
 
-.nav-item {
-  margin: 15px 0;
-  color: #94a3b8;
-  cursor: pointer;
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.nav-item.active { color: white; }
-
-.main { flex: 1; }
-
-/* ===== HEADER (UNCHANGED) ===== */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #020617;
-  border-bottom: 1px solid #1e293b;
-  padding: 12px 16px;
+.brand-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.logo{height:28px;}
+
+.ease{color:#7c3aed;font-weight:600;}
+
+.tagline{
+  font-size:11px;
+  color:#94a3b8;
+  white-space:nowrap;
 }
 
-.brand-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.top-nav{
+  margin-top:10px;
+  display:flex;
+  gap:12px;
+  padding:8px;
+  background:rgba(15,23,42,0.6);
+  border-radius:10px;
 }
 
-.logo { height: 28px; }
-
-.brand-text { display: flex; flex-direction: column; }
-
-.ease {
-  font-size: 15px;
-  font-weight: 600;
-  color: #7c3aed;
+.top-nav div{
+  padding:6px 12px;
+  color:#94a3b8;
+  cursor:pointer;
 }
 
-.tagline {
-  font-size: 11px;
-  color: #94a3b8;
-  white-space: nowrap;
+.top-nav .active{
+  color:white;
+  background:rgba(59,130,246,0.15);
 }
 
-/* RIGHT SIDE */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+/* ===== MAIN GRID ===== */
+.grid{
+  display:flex;
+  justify-content:center;
+  padding:30px 20px;
 }
 
-.header-stats {
-  text-align: right;
-  font-size: 12px;
-  color: #94a3b8;
+/* ===== COMPOSE BOX ===== */
+.compose-box{
+  width:100%;
+  max-width:720px;
+  background:rgba(15,23,42,0.7);
+  border:1px solid #1e293b;
+  border-radius:12px;
+  padding:25px;
 }
 
-.header-stats span {
-  color: #3b82f6;
-  font-weight: 600;
+/* TITLE */
+.compose-title{
+  font-size:20px;
+  margin-bottom:20px;
 }
 
-/* USER */
-.user-badge {
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid #1e293b;
-  font-size: 12px;
-  color: #22c55e;
+/* INPUT GROUP FIX (IMPORTANT) */
+.input-group{
+  width:100%;
 }
 
-/* NAV */
-.top-nav {
-  margin-top: 10px;
-  display: flex;
-  gap: 12px;
-  padding: 8px;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
+/* INPUTS */
+input, textarea{
+  width:100%;
+  box-sizing:border-box; /* 🔥 FIXES RIGHT OVERFLOW */
+  padding:14px;
+  margin-bottom:14px;
+  border-radius:8px;
+  border:none;
+  background:#020617;
+  color:#e2e8f0;
+  font-size:14px;
 }
 
-.top-nav div {
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: #94a3b8;
-  cursor: pointer;
+/* TEXTAREA FIX */
+textarea{
+  min-height:160px;
+  resize:vertical;
 }
 
-.top-nav div.active {
-  color: white;
-  background: rgba(59,130,246,0.15);
+/* BUTTON */
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(90deg,#3b82f6,#7c3aed);
+  color:white;
+  cursor:pointer;
 }
 
-/* ===== GRID ===== */
-.grid {
-  padding: 20px;
-}
-
-/* ===== DASHBOARD ===== */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
-}
-
-.stat-card {
-  background: rgba(15,23,42,0.7);
-  border: 1px solid #1e293b;
-  border-radius: 12px;
-  padding: 25px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
-
-.stat-card h2 { margin: 0; font-size: 32px; }
-
-.yellow { color: #facc15; }
-.green { color: #22c55e; }
-.red { color: #ef4444; }
-.blue { color: #3b82f6; }
-
-.refresh-btn {
-  margin-top: 10px;
-  padding: 8px 10px;
-  border: none;
-  border-radius: 6px;
-  background: #3b82f6;
-  color: white;
-  cursor: pointer;
+/* OUTPUT */
+.output-box{
+  margin-top:20px;
+  max-width:720px;
+  width:100%;
+  background:rgba(15,23,42,0.7);
+  border:1px solid #1e293b;
+  border-radius:12px;
+  padding:20px;
+  white-space:pre-wrap;
 }
 
 /* MOBILE */
-@media (max-width: 768px) {
-  .sidebar { display: none; }
-  .layout { flex-direction: column; }
-  .grid { padding: 12px; }
-  .dashboard-grid { grid-template-columns: 1fr; }
-}
+@media(max-width:768px){
 
-/* 🔥 LOADER */
-.loader-overlay{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(2,6,23,0.6);
-backdrop-filter:blur(8px);
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:9999;
-opacity:1;
-visibility:visible;
-}
+  .sidebar{display:none;}
+  .layout{flex-direction:column;}
 
-.loader-spinner{
-width:50px;height:50px;
-border:4px solid rgba(59,130,246,0.2);
-border-top:4px solid #3b82f6;
-border-radius:50%;
-animation:spin 0.8s linear infinite;
-}
+  .grid{
+    padding:15px;
+  }
 
-@keyframes spin{
-to{transform:rotate(360deg);}
+  .compose-box{
+    padding:18px;
+  }
+
+  input, textarea{
+    padding:12px;
+  }
+
 }
 
 </style>
@@ -208,113 +175,109 @@ to{transform:rotate(360deg);}
 
 <body>
 
-<!-- LOADER -->
-<div id="loaderOverlay" class="loader-overlay">
-<div class="loader-spinner"></div>
-</div>
-
 <div class="layout">
 
-  <div class="sidebar">
-    <h2>EASE</h2>
-    <div class="nav-item active">Dashboard</div>
-    <div class="nav-item" onclick="go('tickets.html')">Tickets</div>
-    <div class="nav-item" onclick="go('reports.html')">Reports</div>
-    <div class="nav-item" onclick="go('settings.html')">Settings</div>
-  </div>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>EASE</h2>
+  <div class="nav-item" onclick="go('dashboard.html')">Dashboard</div>
+  <div class="nav-item" onclick="go('tickets.html')">Tickets</div>
+  <div class="nav-item active">Demo Email</div>
+  <div class="nav-item" onclick="go('reports.html')">Reports</div>
+  <div class="nav-item" onclick="go('settings.html')">Settings</div>
+</div>
 
-  <div class="main">
+<div class="main">
 
-    <div class="header">
-      <div class="header-top">
-        <div class="brand-wrap">
-          <img src="assets/logo.png" class="logo">
-          <div class="brand-text">
-            <div class="ease">EASE</div>
-            <div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
-          </div>
-        </div>
-
-        <div class="header-right">
-          <div class="header-stats">
-            Open <span>12</span><br>
-            Closed <span>5</span>
-          </div>
-          <div class="user-badge">Admin</div>
-        </div>
-      </div>
-
-      <div class="top-nav">
-        <div class="active">Dashboard</div>
-        <div onclick="go('tickets.html')">Tickets</div>
-        <div onclick="go('reports.html')">Reports</div>
-        <div onclick="go('settings.html')">Settings</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="brand-wrap">
+      <img src="assets/logo.png" class="logo">
+      <div>
+        <div class="ease">EASE</div>
+        <div class="tagline">Powered by Offices of Nawnit&nbsp;Nihal</div>
       </div>
     </div>
+  </div>
 
-    <div class="grid">
-      <div class="dashboard-grid">
+  <div class="top-nav">
+    <div onclick="go('dashboard.html')">Dashboard</div>
+    <div onclick="go('tickets.html')">Tickets</div>
+    <div class="active">Demo Email</div>
+    <div onclick="go('reports.html')">Reports</div>
+    <div onclick="go('settings.html')">Settings</div>
+  </div>
+</div>
 
-        <div class="stat-card yellow">
-          <h2>5</h2>
-          Yellow Tickets
-        </div>
+<!-- CONTENT -->
+<div class="grid">
 
-        <div class="stat-card green">
-          <h2>12</h2>
-          Green Tickets
-        </div>
+  <div>
+    <!-- COMPOSE -->
+    <div class="compose-box">
 
-        <div class="stat-card red">
-          <h2>3</h2>
-          Red Tickets
-        </div>
+      <div class="compose-title">Client’s Demo Email</div>
 
-        <div class="stat-card blue">
-          <h2>7</h2>
-          Unticketed Emails
-          <br>
-          <button class="refresh-btn" onclick="refreshData()">Refresh</button>
-        </div>
+      <input id="name" placeholder="Client Name">
+      <input id="email" placeholder="Client Email">
+      <input id="subject" placeholder="Subject">
+      <textarea id="message" placeholder="Type your email..."></textarea>
 
-      </div>
+      <button onclick="sendMail()">Send</button>
+
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="output-box" id="output">
+Response will appear here...
     </div>
 
   </div>
+
+</div>
+
+</div>
 </div>
 
 <script>
 
-function go(page){
-  window.location.href = page;
+const API_URL = "https://script.google.com/macros/s/AKfycbwTJijz81CxBrY0_YrKH3dK5erasji0gHX6Kuo5rVFgS5u0lBMiNiV4AtGcdtSyUHCt/exec";
+
+function go(page){ window.location.href = page; }
+
+async function sendMail(){
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const subject = document.getElementById("subject").value;
+  const message = document.getElementById("message").value;
+
+  if (!email || !message){
+    alert("Email and message required");
+    return;
+  }
+
+  document.getElementById("output").innerText = "Processing...";
+
+  const res = await fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      email,
+      subject,
+      body: message
+    })
+  });
+
+  const data = await res.json();
+
+  document.getElementById("output").innerText =
+`Ticket ID: ${data.ticketId}
+
+${data.reply}`;
+
 }
-
-/* 🔥 LOADER CONTROL */
-function showLoader(){
-  document.getElementById("loaderOverlay").style.display = "flex";
-}
-
-function hideLoader(){
-  document.getElementById("loaderOverlay").style.display = "none";
-}
-
-/* 🔥 API CALL WITH LOADER */
-function refreshData(){
-  showLoader();
-
-  console.log("API CALL → backend");
-
-  setTimeout(() => {
-    hideLoader();
-  }, 800); // simulate API delay (replace with real fetch later)
-}
-
-setInterval(refreshData, 300000);
-
-/* 🔥 HIDE LOADER AFTER PAGE LOAD */
-window.addEventListener("load", function(){
-  hideLoader();
-});
 
 </script>
 
