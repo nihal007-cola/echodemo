@@ -49,24 +49,53 @@ body {
   flex: 1;
 }
 
-/* ===== HEADER ===== */
+/* ===== STICKY HEADER ===== */
 .header {
   position: sticky;
   top: 0;
+  z-index: 1000;
   background: #020617;
-  padding: 15px 20px;
   border-bottom: 1px solid #1e293b;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.counter {
-  font-size: 14px;
+/* LEFT HEADER */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 35px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand .ease {
+  font-size: 16px;
+  font-weight: bold;
+  color: #7c3aed;
+}
+
+.brand .tagline {
+  font-size: 11px;
   color: #94a3b8;
 }
 
-.counter span {
+/* RIGHT HEADER */
+.header-right {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.header-right span {
   color: #3b82f6;
   font-weight: bold;
 }
@@ -75,7 +104,7 @@ body {
 .grid {
   padding: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
 }
 
@@ -89,16 +118,27 @@ body {
 }
 
 .card h3 {
-  margin: 0 0 10px 0;
+  margin: 0;
 }
 
+/* META */
 .meta {
   font-size: 13px;
   color: #94a3b8;
+  margin: 6px 0;
+}
+
+/* CLIENT INFO */
+.client {
+  font-size: 13px;
   margin-bottom: 10px;
 }
 
-/* ===== STATUS LIGHT ===== */
+.client span {
+  color: #3b82f6;
+}
+
+/* STATUS */
 .status {
   font-size: 12px;
   margin-bottom: 10px;
@@ -108,7 +148,7 @@ body {
 .yellow { color: #facc15; }
 .red { color: #ef4444; }
 
-/* ===== BUTTONS ===== */
+/* BUTTONS */
 .actions button {
   margin: 5px 5px 0 0;
   padding: 8px 10px;
@@ -122,6 +162,7 @@ body {
 .custom { background: #7c3aed; color: white; }
 .print { background: #1e293b; color: white; }
 .refresh { background: #f43f5e; color: white; }
+.history { background: #0ea5e9; color: white; }
 
 /* ===== MOBILE ===== */
 @media (max-width: 768px) {
@@ -146,7 +187,6 @@ body {
   <!-- SIDEBAR -->
   <div class="sidebar">
     <h2>EASE</h2>
-
     <div class="nav-item">Dashboard</div>
     <div class="nav-item">Tickets</div>
     <div class="nav-item">Reports</div>
@@ -158,52 +198,86 @@ body {
 
     <!-- HEADER -->
     <div class="header">
-      <div>EASE Control Panel</div>
-      <div class="counter">
-        Open Tickets: <span>12</span> | Closed: <span>5</span>
+
+      <div class="header-left">
+        <img src="assets/logo.png" class="logo">
+
+        <div class="brand">
+          <div class="ease">EASE</div>
+          <div class="tagline">Powered by Offices of Nawnit Nihal</div>
+        </div>
       </div>
+
+      <div class="header-right">
+        Open: <span>12</span> | Closed: <span>5</span>
+      </div>
+
     </div>
 
     <!-- GRID -->
     <div class="grid">
 
-      <!-- CARD 1 -->
+      <!-- CARD -->
       <div class="card">
         <h3>TKT-0001</h3>
+
         <div class="meta">GST Plan | Mumbai</div>
+
+        <div class="client">
+          Client: <span>Rahul Sharma</span><br>
+          📞 +91 9876543210
+        </div>
+
         <div class="status green">Active</div>
 
         <div class="actions">
           <button class="follow">Follow-up</button>
           <button class="custom">Custom Mail</button>
+          <button class="history">History</button>
           <button class="print">Print</button>
           <button class="refresh">Refresh</button>
         </div>
       </div>
 
-      <!-- CARD 2 -->
+      <!-- CARD -->
       <div class="card">
         <h3>TKT-0002</h3>
+
         <div class="meta">Virtual Office | Delhi</div>
+
+        <div class="client">
+          Client: <span>Anjali Mehta</span><br>
+          📞 +91 9123456780
+        </div>
+
         <div class="status yellow">Pending</div>
 
         <div class="actions">
           <button class="follow">Follow-up</button>
           <button class="custom">Custom Mail</button>
+          <button class="history">History</button>
           <button class="print">Print</button>
           <button class="refresh">Refresh</button>
         </div>
       </div>
 
-      <!-- CARD 3 -->
+      <!-- CARD -->
       <div class="card">
         <h3>TKT-0003</h3>
+
         <div class="meta">Mailing Address | Bangalore</div>
+
+        <div class="client">
+          Client: <span>Vikram Rao</span><br>
+          📞 +91 9988776655
+        </div>
+
         <div class="status red">Attention Needed</div>
 
         <div class="actions">
           <button class="follow">Follow-up</button>
           <button class="custom">Custom Mail</button>
+          <button class="history">History</button>
           <button class="print">Print</button>
           <button class="refresh">Refresh</button>
         </div>
