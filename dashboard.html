@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EASE Dashboard</title>
+
+<style>
+
+/* ===== GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #020617;
+  color: #e2e8f0;
+}
+
+.layout {
+  display: flex;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background: #020617;
+  border-right: 1px solid #1e293b;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #3b82f6;
+}
+
+.nav-item {
+  margin: 15px 0;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.nav-item:hover {
+  color: white;
+}
+
+/* ===== MAIN ===== */
+.main {
+  flex: 1;
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: sticky;
+  top: 0;
+  background: #020617;
+  padding: 15px 20px;
+  border-bottom: 1px solid #1e293b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.counter {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.counter span {
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+/* ===== GRID ===== */
+.grid {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+}
+
+.meta {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+/* ===== STATUS LIGHT ===== */
+.status {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.green { color: #22c55e; }
+.yellow { color: #facc15; }
+.red { color: #ef4444; }
+
+/* ===== BUTTONS ===== */
+.actions button {
+  margin: 5px 5px 0 0;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.follow { background: #3b82f6; color: white; }
+.custom { background: #7c3aed; color: white; }
+.print { background: #1e293b; color: white; }
+.refresh { background: #f43f5e; color: white; }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+
+  .sidebar {
+    display: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>EASE</h2>
+
+    <div class="nav-item">Dashboard</div>
+    <div class="nav-item">Tickets</div>
+    <div class="nav-item">Reports</div>
+    <div class="nav-item">Settings</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div>EASE Control Panel</div>
+      <div class="counter">
+        Open Tickets: <span>12</span> | Closed: <span>5</span>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="grid">
+
+      <!-- CARD 1 -->
+      <div class="card">
+        <h3>TKT-0001</h3>
+        <div class="meta">GST Plan | Mumbai</div>
+        <div class="status green">Active</div>
+
+        <div class="actions">
+          <button class="follow">Follow-up</button>
+          <button class="custom">Custom Mail</button>
+          <button class="print">Print</button>
+          <button class="refresh">Refresh</button>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="card">
+        <h3>TKT-0002</h3>
+        <div class="meta">Virtual Office | Delhi</div>
+        <div class="status yellow">Pending</div>
+
+        <div class="actions">
+          <button class="follow">Follow-up</button>
+          <button class="custom">Custom Mail</button>
+          <button class="print">Print</button>
+          <button class="refresh">Refresh</button>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="card">
+        <h3>TKT-0003</h3>
+        <div class="meta">Mailing Address | Bangalore</div>
+        <div class="status red">Attention Needed</div>
+
+        <div class="actions">
+          <button class="follow">Follow-up</button>
+          <button class="custom">Custom Mail</button>
+          <button class="print">Print</button>
+          <button class="refresh">Refresh</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
