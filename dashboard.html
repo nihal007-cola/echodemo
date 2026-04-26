@@ -168,6 +168,67 @@ body {
   cursor: pointer;
 }
 
+/* ================= MOBILE ONLY (ADDED) ================= */
+@media (max-width: 768px) {
+
+  .sidebar {
+    display: none;
+  }
+
+  .layout {
+    flex-direction: column;
+  }
+
+  .grid {
+    padding: 12px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .top-nav div {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .header {
+    padding: 10px;
+  }
+
+  .logo {
+    height: 22px;
+  }
+
+  .ease {
+    font-size: 13px;
+  }
+
+  .tagline {
+    font-size: 9px;
+  }
+
+  .header-stats {
+    font-size: 10px;
+  }
+
+  .user-badge {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+}
+/* ===================================================== */
+
 </style>
 </head>
 
@@ -217,7 +278,7 @@ body {
 
     </div>
 
-    <!-- DASHBOARD ONLY -->
+    <!-- DASHBOARD -->
     <div class="grid">
       <div class="dashboard-grid">
 
