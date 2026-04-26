@@ -168,75 +168,53 @@ body {
   cursor: pointer;
 }
 
-/* ================= MOBILE ONLY (ADDED) ================= */
+/* MOBILE */
 @media (max-width: 768px) {
-
-  .sidebar {
-    display: none;
-  }
-
-  .layout {
-    flex-direction: column;
-  }
-
-  .grid {
-    padding: 12px;
-  }
-
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .top-nav {
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .top-nav div {
-    font-size: 12px;
-    padding: 5px 10px;
-  }
-
-  .header {
-    padding: 10px;
-  }
-
-  .logo {
-    height: 22px;
-  }
-
-  .ease {
-    font-size: 13px;
-  }
-
-  .tagline {
-    font-size: 9px;
-  }
-
-  .header-stats {
-    font-size: 10px;
-  }
-
-  .user-badge {
-    font-size: 10px;
-    padding: 4px 6px;
-  }
-
-  .stat-card {
-    padding: 18px;
-  }
-
+  .sidebar { display: none; }
+  .layout { flex-direction: column; }
+  .grid { padding: 12px; }
+  .dashboard-grid { grid-template-columns: 1fr; }
 }
-/* ===================================================== */
+
+/* 🔥 LOADER */
+.loader-overlay{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(2,6,23,0.6);
+backdrop-filter:blur(8px);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+opacity:1;
+visibility:visible;
+}
+
+.loader-spinner{
+width:50px;height:50px;
+border:4px solid rgba(59,130,246,0.2);
+border-top:4px solid #3b82f6;
+border-radius:50%;
+animation:spin 0.8s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
 
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
+<div id="loaderOverlay" class="loader-overlay">
+<div class="loader-spinner"></div>
+</div>
+
 <div class="layout">
 
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <h2>EASE</h2>
     <div class="nav-item active">Dashboard</div>
@@ -247,9 +225,7 @@ body {
 
   <div class="main">
 
-    <!-- HEADER -->
     <div class="header">
-
       <div class="header-top">
         <div class="brand-wrap">
           <img src="assets/logo.png" class="logo">
@@ -264,7 +240,6 @@ body {
             Open <span>12</span><br>
             Closed <span>5</span>
           </div>
-
           <div class="user-badge">Admin</div>
         </div>
       </div>
@@ -275,10 +250,8 @@ body {
         <div onclick="go('reports.html')">Reports</div>
         <div onclick="go('settings.html')">Settings</div>
       </div>
-
     </div>
 
-    <!-- DASHBOARD -->
     <div class="grid">
       <div class="dashboard-grid">
 
@@ -321,6 +294,11 @@ function refreshData(){
 }
 
 setInterval(refreshData, 300000);
+
+/* 🔥 HIDE LOADER AFTER PAGE LOAD */
+window.addEventListener("load", function(){
+  document.getElementById("loaderOverlay").style.display = "none";
+});
 
 </script>
 
