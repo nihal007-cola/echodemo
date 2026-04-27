@@ -213,15 +213,10 @@ async function sendMail(){
   document.getElementById("loader").style.display = "block";
   document.getElementById("output").innerText = "";
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      name,
-      email,
-      subject,
-      body: message
-    })
-  });
+  // ✅ FIX: GET REQUEST (NO CORS ISSUE)
+  const res = await fetch(
+    `${API_URL}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`
+  );
 
   const data = await res.json();
 
